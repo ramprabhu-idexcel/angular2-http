@@ -1,15 +1,8 @@
 // Here we import the Angular 2 core so that our component code can have access to the @Component decorator
 import { Component } from '@angular/core';
 
-export class Hero {
-    id: number;
-    name: string;
-}
+import { Hero } from './hero';
 
-export class Number {
-    number1: number;
-    number2: number;
-}
 
 const HEROES: Hero[] = [
     { id: 11, name: 'Mr. Nice' },
@@ -31,39 +24,14 @@ const HEROES: Hero[] = [
     selector: 'my-app',
     template:`
         <h1>{{ title }}</h1>
-        <div *ngIf="selectedHero">
-            <h2>{{ selectedHero.name }} details!</h2>
-            <div><label>id: </label>{{ selectedHero.id }}</div>
-            <div>
-              <label>name: </label>
-              <input [(ngModel)]="selectedHero.name" placeholder="name">
-            </div>
-        </div>
+        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
         <h2>My Heroes</h2>
         <ul class="heroes">
             <li *ngFor="let hero of heroes" [(class.selected)]="hero === selectedHero" (click)="onSelect(hero)">
               <span class="badge">{{ hero.id }}</span> {{ hero.name }}
             </li>
         </ul>
-        <div *ngIf="totalSum">
-          <h2>Total Sum: {{ totalSum }}</h2>
-        </div>
-        <div>
-          <label>First Number: </label>
-          <input [(ngModel)]="number1" type="number" placeholder="number1">
-        </div>
-        <div>
-          <label>Second Number: </label>
-          <input [(ngModel)]="number2" type="number" placeholder="number2">
-        </div>
-        <br/>
-        <div>
-          <button (click)="Calculate('+')">Sum(+)</button>
-          <button (click)="Calculate('-')">Sub(-)</button>
-          <button (click)="Calculate('*')">Mul(*)</button>
-          <button (click)="Calculate('/')">Div(/)</button>
-        </div>
-
+        <my-calc-detail></my-calc-detail>
         `,
     styles: [`
       .selected {
@@ -118,32 +86,9 @@ const HEROES: Hero[] = [
 
 export class AppComponent {
     title = 'Tour of Heroes';
-    // calculator program
-    number1 = 10;
-    number2 = 20;
-    totalSum: sum = (this.number1 + this.number2);
     // list of hero's
     selectedHero: Hero;
     onSelect(hero: Hero) { this.selectedHero = hero; }
     heroes = HEROES;
-
-    // calculator function
-    Calculate(action: string) {
-        switch (action) {
-            case '+':
-                this.totalSum = this.number1 + this.number2;
-                break;
-            case '-':
-                this.totalSum = this.number1 - this.number2;
-                break;
-            case '*':
-                this.totalSum = this.number1 * this.number2;
-                break;
-            case '/':
-                this.totalSum = this.number1 / this.number2;
-                break;
-            default:
-        }
-    }
 }
 
