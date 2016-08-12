@@ -11,16 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+// importing http module
+var http_1 = require('@angular/http');
+// importing app component
 var app_component_1 = require('./app.component');
+// importing hero detail component
 var hero_detail_component_1 = require('./hero-detail.component');
+// importing calculator component
 var calculator_component_1 = require('./calculator.component');
+// importing heroes component
+var heroes_component_1 = require('./heroes.component');
+// importing hero service
+var hero_service_1 = require('./hero.service');
+// importing router module
+var app_routing_1 = require('./app.routing');
+// importing dashboard component
+var dashboard_component_1 = require('./dashboard.component');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule],
-            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, calculator_component_1.CalculatorComponent],
+            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, app_routing_1.routing, http_1.HttpModule],
+            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, calculator_component_1.CalculatorComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent],
+            providers: [hero_service_1.HeroService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

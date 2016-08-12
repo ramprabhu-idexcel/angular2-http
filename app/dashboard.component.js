@@ -9,33 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-/* ActivateRoute service and use the HeroService to fetch the hero with that id */
 var router_1 = require('@angular/router');
 var hero_service_1 = require('./hero.service');
-var HeroDetailComponent = (function () {
-    function HeroDetailComponent(heroService, route) {
+var DashboardComponent = (function () {
+    function DashboardComponent(router, heroService) {
+        this.router = router;
         this.heroService = heroService;
-        this.route = route;
+        this.heroes = [];
     }
-    HeroDetailComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params.forEach(function (params) {
-            var id = +params['id'];
-            _this.hero = _this.heroService.getHero(id);
-        });
+    DashboardComponent.prototype.ngOnInit = function () {
+        this.getHeroes();
     };
-    HeroDetailComponent.prototype.goBack = function () {
-        window.history.back();
+    DashboardComponent.prototype.getHeroes = function () {
+        this.heroes = this.heroService.getHeroes().slice(1, 5);
     };
-    HeroDetailComponent = __decorate([
+    DashboardComponent.prototype.gotoDetail = function (hero) {
+        var link = ['/detail', hero.id];
+        this.router.navigate(link);
+    };
+    DashboardComponent = __decorate([
         core_1.Component({
-            selector: 'my-hero-detail',
-            templateUrl: 'app/hero-detail.component.html',
-            styleUrls: ['app/hero-detail.component.css']
+            selector: 'my-dashboard',
+            templateUrl: 'app/dashboard.component.html',
+            styleUrls: ['app/dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.ActivatedRoute])
-    ], HeroDetailComponent);
-    return HeroDetailComponent;
+        __metadata('design:paramtypes', [router_1.Router, hero_service_1.HeroService])
+    ], DashboardComponent);
+    return DashboardComponent;
 }());
-exports.HeroDetailComponent = HeroDetailComponent;
-//# sourceMappingURL=hero-detail.component.js.map
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map
